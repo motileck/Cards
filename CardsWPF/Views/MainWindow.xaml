@@ -1,0 +1,38 @@
+﻿<Window x:Class="CardsWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CardsWPF"
+        xmlns:v ="clr-namespace:CardsWPF.ViewModels"
+        xmlns:c ="clr-namespace:CardsWPF.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <c:BitmapConverter x:Key="BitmapConverter"/>
+    </Window.Resources>
+    <Grid>
+
+        <ListBox ItemsSource="{Binding Cards}" SelectedItem ="{Binding SelectedCard}">
+
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="add" Click="MenuItem_OnClick"/>
+                    <MenuItem Header ="delete" Click="Delete_OnClick"/>
+                    <MenuItem Header ="update" Click="Update_OnClick"/>
+                    <MenuItem Header ="refresh" Click="Refresh_OnClick"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="100" Height="150">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="Image" Margin="0,0,0,35" Source="{Binding Title, Converter={StaticResource BitmapConverter}}"/>
+                        <TextBlock VerticalAlignment="Bottom" Height="35" FontSize="20" Text="{Binding Name}" />
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Window>
